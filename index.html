@@ -1,55 +1,214 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Eyyup'un Sitesi</title>
-  
-  <!-- Next mavi tik için fediverse meta tag -->
-  <meta name="fediverse:creator" content="@eyyup_ctrz@sosyal.teknofest.app">
-  
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      background: #f2f2f2;
-      margin: 0;
-      padding: 0;
-    }
-    header {
-      background: #333;
-      color: #fff;
-      padding: 20px;
-    }
-    main {
-      padding: 20px;
-    }
-    footer {
-      background: #333;
-      color: #fff;
-      padding: 10px;
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eyyup'un Sitesi</title>
+
+<!-- Next mavi tik için fediverse meta tag -->
+<meta name="fediverse:creator" content="@eyyup_ctrz@sosyal.teknofest.app">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+  /* Genel Ayarlar */
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background-color: #000;
+    color: #fff;
+  }
+  a { text-decoration: none; }
+
+  /* Üst Bant */
+  header {
+    background-color: #111;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+  }
+  .logo {
+    color: #2ECC71;
+    font-size: 28px;
+    font-weight: 700;
+    text-transform: uppercase;
+    transition: transform 0.3s;
+  }
+  .logo:hover { transform: scale(1.1); }
+  nav a {
+    color: #fff;
+    margin-left: 25px;
+    position: relative;
+    transition: color 0.3s;
+  }
+  nav a::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    background: #2ECC71;
+    transition: width 0.3s;
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+  }
+  nav a:hover {
+    color: #E74C3C;
+  }
+  nav a:hover::after { width: 100%; }
+
+  /* Hero / Öne Çıkan Haber */
+  .hero {
+    position: relative;
+    text-align: left;
+    max-width: 900px;
+    margin: 50px auto;
+  }
+  .hero img {
+    width: 100%;
+    border-radius: 10px;
+    transition: opacity 0.5s;
+  }
+  .hero img:hover { opacity: 0.9; }
+  .hero-content {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    color: #fff;
+    background: rgba(0,0,0,0.5);
+    padding: 20px;
+    border-radius: 8px;
+  }
+  .hero-content h1 {
+    color: #2ECC71;
+    font-size: 36px;
+    margin-bottom: 10px;
+  }
+  .hero-content p {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  .hero-content a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #E74C3C;
+    color: #fff;
+    border-radius: 5px;
+    transition: background 0.3s;
+  }
+  .hero-content a:hover { background-color: #C0392B; }
+
+  /* Haber Kartları */
+  .news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    max-width: 1000px;
+    margin: 50px auto;
+    padding: 0 20px;
+  }
+  .news-card {
+    background-color: #111;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .news-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.6);
+  }
+  .news-card img { width: 100%; }
+  .news-card .card-content {
+    padding: 15px;
+  }
+  .news-card h3 { color: #2ECC71; margin-bottom: 10px; }
+  .news-card p { font-size: 15px; color: #ccc; line-height: 1.6; }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #111;
+    color: #888;
+    margin-top: 50px;
+  }
+
+  /* Next Verification Link */
+  .verification {
+    color: #2ECC71;
+    display: inline-block;
+    margin-top: 10px;
+  }
+
+  /* Responsive */
+  @media(max-width:768px){
+    header { flex-direction: column; align-items: flex-start; }
+    nav { margin-top: 10px; }
+    nav a { margin-left: 0; margin-right: 15px; }
+    .hero-content h1 { font-size: 28px; }
+  }
+</style>
 </head>
 <body>
-  <header>
-    <h1>Hoşgeldiniz!</h1>
-  </header>
 
-  <main>
-    <h2>Benim Kişisel Web Sitem</h2>
-    <p>Ced</p>
-    
-    <!-- Next mavi tik için rel="me" linki -->
-    <a rel="me" href="https://sosyal.teknofest.app/@eyyup_ctrz">Next Verification</a>
-  </main>
+<header>
+  <div class="logo">Next</div>
+  <nav>
+    <a href="#">Ana Sayfa</a>
+    <a href="#">Dünya</a>
+    <a href="#">Teknoloji</a>
+    <a href="#">İletişim</a>
+  </nav>
+</header>
 
-  <footer>
-    <p>© 2025 Eyyup</p>
-  </footer>
+<!-- Öne Çıkan Haber -->
+<section class="hero">
+  <img src="https://via.placeholder.com/900x400" alt="Öne Çıkan Haber">
+  <div class="hero-content">
+    <h1>Öne Çıkan Haber Başlığı</h1>
+    <p>Kısa özet metni buraya gelecek. Haber ile ilgili dikkat çekici bir cümle.</p>
+    <a href="#">Devamını Oku</a>
+  </div>
+</section>
+
+<!-- Diğer Haberler -->
+<section class="news-grid">
+  <div class="news-card">
+    <img src="https://via.placeholder.com/400x200" alt="Haber 1">
+    <div class="card-content">
+      <h3>Haber Başlığı 1</h3>
+      <p>Kısa özet burada yer alacak. Kullanıcı ilgisini çekecek bir açıklama.</p>
+    </div>
+  </div>
+  <div class="news-card">
+    <img src="https://via.placeholder.com/400x200" alt="Haber 2">
+    <div class="card-content">
+      <h3>Haber Başlığı 2</h3>
+      <p>Kısa özet burada yer alacak. Kullanıcı ilgisini çekecek bir açıklama.</p>
+    </div>
+  </div>
+  <div class="news-card">
+    <img src="https://via.placeholder.com/400x200" alt="Haber 3">
+    <div class="card-content">
+      <h3>Haber Başlığı 3</h3>
+      <p>Kısa özet burada yer alacak. Kullanıcı ilgisini çekecek bir açıklama.</p>
+    </div>
+  </div>
+</section>
+
+<main>
+  <!-- Next mavi tik için rel="me" linki -->
+  <a class="verification" rel="me" href="https://sosyal.teknofest.app/@eyyup_ctrz">Next Verification</a>
+</main>
+
+<footer>
+  <p>© 2025 Eyyup</p>
+</footer>
+
 </body>
 </html>
-
