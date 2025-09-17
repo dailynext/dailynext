@@ -33,13 +33,13 @@
     box-shadow: 0 2px 5px rgba(0,0,0,0.5);
   }
   .logo {
-    color: #2ECC71;
     font-size: 28px;
-    font-weight: 700;
-    text-transform: uppercase;
-    transition: transform 0.3s;
+    font-weight: 400;
+    color: #fff;
   }
-  .logo:hover { transform: scale(1.1); }
+  .logo span {
+    font-weight: 700; /* NEXT kısmı kalın */
+  }
   nav a {
     color: #fff;
     margin-left: 25px;
@@ -89,19 +89,6 @@
     font-size: 36px;
     margin-bottom: 10px;
   }
-  .hero-content p {
-    font-size: 16px;
-    margin-bottom: 10px;
-  }
-  .hero-content a {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #E74C3C;
-    color: #fff;
-    border-radius: 5px;
-    transition: background 0.3s;
-  }
-  .hero-content a:hover { background-color: #C0392B; }
 
   /* Haber Kartları */
   .news-grid {
@@ -157,11 +144,11 @@
 <body>
 
 <header>
-  <div class="logo">Next</div>
+  <div class="logo">Daily<span>NEXT</span></div>
   <nav>
     <a href="#">Ana Sayfa</a>
-    <a href="#">Dünya</a>
-    <a href="#">Teknoloji</a>
+    <a href="#">Filistin</a>
+    <a href="#">Türkiye</a>
     <a href="#">İletişim</a>
   </nav>
 </header>
@@ -172,7 +159,7 @@
   <div class="hero-content">
     <h1>Öne Çıkan Haber Başlığı</h1>
     <p>Kısa özet metni buraya gelecek. Haber ile ilgili dikkat çekici bir cümle.</p>
-    <a href="#">Devamını Oku</a>
+    <!-- Devamını Oku butonu kaldırıldı -->
   </div>
 </section>
 
@@ -211,4 +198,4 @@
 </footer>
 
 </body>
-</html>
+  </html>
