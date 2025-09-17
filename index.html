@@ -11,16 +11,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
-  /* Genel Ayarlar */
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: 'Inter', sans-serif;
-    background-color: #000;
-    color: #fff;
-  }
+  body { font-family: 'Inter', sans-serif; background-color: #000; color: #fff; }
   a { text-decoration: none; }
 
-  /* Üst Bant */
   header {
     background-color: #111;
     display: flex;
@@ -32,102 +26,36 @@
     z-index: 1000;
     box-shadow: 0 2px 5px rgba(0,0,0,0.5);
   }
-  .logo {
-    font-size: 28px;
-    font-weight: 400;
-    color: #fff;
-  }
-  .logo span {
-    font-weight: 700; /* NEXT kısmı kalın */
-  }
-  nav a {
-    color: #fff;
-    margin-left: 25px;
-    position: relative;
-    transition: color 0.3s;
-  }
+  .logo { font-size: 28px; font-weight: 400; color: #fff; }
+  .logo span { font-weight: 700; }
+  nav a { color: #fff; margin-left: 25px; position: relative; transition: color 0.3s; }
   nav a::after {
-    content: '';
-    display: block;
-    width: 0;
-    height: 2px;
-    background: #2ECC71;
-    transition: width 0.3s;
-    position: absolute;
-    bottom: -5px;
-    left: 0;
+    content: ''; display: block; width: 0; height: 2px; background: #2ECC71; transition: width 0.3s;
+    position: absolute; bottom: -5px; left: 0;
   }
-  nav a:hover {
-    color: #E74C3C;
-  }
+  nav a:hover { color: #E74C3C; }
   nav a:hover::after { width: 100%; }
 
-  /* Hero / Öne Çıkan Haber */
-  .hero {
-    position: relative;
-    text-align: left;
-    max-width: 900px;
-    margin: 50px auto;
-  }
-  .hero img {
-    width: 100%;
-    border-radius: 10px;
-    transition: opacity 0.5s;
-  }
+  .hero { position: relative; text-align: left; max-width: 900px; margin: 50px auto; }
+  .hero img { width: 100%; border-radius: 10px; transition: opacity 0.5s; }
   .hero img:hover { opacity: 0.9; }
-  .hero-content {
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-    color: #fff;
-    background: rgba(0,0,0,0.5);
-    padding: 20px;
-    border-radius: 8px;
-  }
+  .hero-content { position: absolute; bottom: 20px; left: 20px; color: #fff; background: rgba(0,0,0,0.5); padding: 20px; border-radius: 8px; }
 
-  /* Haber Kartları */
   .news-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
-    max-width: 1000px;
-    margin: 50px auto;
-    padding: 0 20px;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px; max-width: 1000px; margin: 50px auto; padding: 0 20px;
   }
-  .news-card {
-    background-color: #111;
-    border-radius: 10px;
-    overflow: hidden;
-    transition: transform 0.3s, box-shadow 0.3s;
-  }
-  .news-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.6);
-  }
-  .news-card img { width: 100%; }
-  .news-card .card-content {
-    padding: 15px;
-  }
+  .news-card { background-color: #111; border-radius: 10px; overflow: hidden; transition: transform 0.3s, box-shadow 0.3s; }
+  .news-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.6); }
+  .news-card img { width: 100%; height: auto; border-bottom: 2px solid #2ECC71; }
+  .news-card .card-content { padding: 15px; }
   .news-card h3 { color: #2ECC71; margin-bottom: 10px; }
   .news-card p { font-size: 15px; color: #ccc; line-height: 1.6; }
 
-  /* Footer */
-  footer {
-    text-align: center;
-    padding: 20px;
-    background-color: #111;
-    color: #888;
-    margin-top: 50px;
-  }
+  footer { text-align: center; padding: 20px; background-color: #111; color: #888; margin-top: 50px; }
 
-  /* Next Verification Link */
-  .verification {
-    color: #2ECC71;
-    display: inline-block;
-    margin-top: 10px;
-  }
+  .verification { color: #2ECC71; display: inline-block; margin-top: 10px; }
 
-  /* Responsive */
   @media(max-width:768px){
     header { flex-direction: column; align-items: flex-start; }
     nav { margin-top: 10px; }
@@ -147,7 +75,6 @@
   </nav>
 </header>
 
-<!-- Öne Çıkan Haber -->
 <section class="hero">
   <img src="https://via.placeholder.com/900x400" alt="Öne Çıkan Haber">
   <div class="hero-content">
@@ -155,39 +82,54 @@
   </div>
 </section>
 
-<!-- Diğer Haberler -->
 <section class="news-grid">
-  <div class="news-card">
-    <img src="https://via.placeholder.com/400x200" alt="Haber 1">
-    <div class="card-content">
-      <h3>Haber Başlığı 1</h3>
-      <p>Kısa özet burada yer alacak. Kullanıcı ilgisini çekecek bir açıklama.</p>
-    </div>
-  </div>
-  <div class="news-card">
-    <img src="https://via.placeholder.com/400x200" alt="Haber 2">
-    <div class="card-content">
-      <h3>Haber Başlığı 2</h3>
-      <p>Kısa özet burada yer alacak. Kullanıcı ilgisini çekecek bir açıklama.</p>
-    </div>
-  </div>
-  <div class="news-card">
-    <img src="https://via.placeholder.com/400x200" alt="Haber 3">
-    <div class="card-content">
-      <h3>Haber Başlığı 3</h3>
-      <p>Kısa özet burada yer alacak. Kullanıcı ilgisini çekecek bir açıklama.</p>
-    </div>
-  </div>
+  <!-- Haber kartları buraya JS ile yüklenecek -->
 </section>
 
 <main>
-  <!-- Next mavi tik için rel="me" linki -->
   <a class="verification" rel="me" href="https://sosyal.teknofest.app/@eyyup_ctrz">Next Verification</a>
 </main>
 
 <footer>
   <p>© 2025 Eyyup</p>
 </footer>
+
+<script>
+  const newsData = [
+    {
+      "title": "İsrail, Han Yunus ve Nuseyrat'ta Yine Sivilleri Vurdu!",
+      "summary": "İsrail ordusu, Gazze'nin Han Yunus ve Nuseyrat bölgelerinde sivillere yönelik saldırılar düzenledi.",
+      "image": "https://via.placeholder.com/400x200",
+      "link": "https://sosyal.teknofest.app/@eyyup_ctrz/115209900827138175"
+    },
+    {
+      "title": "Erbaş: Filistin'e huzur gelmeden yeryüzüne huzur gelmeyecek",
+      "summary": "Diyanet İşleri Başkanı Prof. Dr. Ali Erbaş, Gazze konferansında açıklamalarda bulundu.",
+      "image": "https://via.placeholder.com/400x200",
+      "link": "https://www.diyanethaber.com.tr/erbas-filistine-huzur-gelmeden-yeryuzune-huzur-gelmeyecek"
+    },
+    {
+      "title": "İsrail, ağır koşullarda alıkoyduğu 10 Gazzeliyi serbest bıraktı",
+      "summary": "İsrail ordusu, Gazze Şeridi'nden alıkoyduğu 10 Filistinliyi serbest bıraktı.",
+      "image": "https://via.placeholder.com/400x200",
+      "link": "https://www.aa.com.tr/tr/dunya/israil-agir-kosullarda-alikoydugu-10-gazzeliyi-serbest-birakti/3665971"
+    }
+  ];
+
+  const newsGrid = document.querySelector('.news-grid');
+  newsData.forEach(news => {
+    const card = document.createElement('div');
+    card.classList.add('news-card');
+    card.innerHTML = `
+      <img src="${news.image}" alt="${news.title}">
+      <div class="card-content">
+        <h3><a href="${news.link}" target="_blank">${news.title}</a></h3>
+        <p>${news.summary}</p>
+      </div>
+    `;
+    newsGrid.appendChild(card);
+  });
+</script>
 
 </body>
 </html>
