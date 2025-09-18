@@ -12,15 +12,18 @@
       color: #fff;
     }
     header {
-      background-color: #014421; /* daha koyu yeşil */
+      background-color: #012d12; /* daha koyu yeşil */
       padding: 15px 30px;
       text-align: left;
     }
     header h1 {
       margin: 0;
       font-size: 24px;
-      font-weight: bold;
       color: #fff;
+      font-weight: normal;
+    }
+    header h1 .next {
+      font-weight: bold; /* NEXT kalın */
     }
     nav {
       background-color: #222;
@@ -43,7 +46,7 @@
       bottom: 0;
       width: 0;
       height: 2px;
-      background-color: #0f0; /* yeşil animasyon çizgisi */
+      background-color: #fff; /* beyaz animasyon çizgisi */
       transition: width 0.3s ease;
     }
     nav a:hover::after {
@@ -115,7 +118,7 @@
 </head>
 <body>
   <header>
-    <h1>DailyNEXT</h1>
+    <h1><span class="daily">Daily</span><span class="next">NEXT</span></h1>
   </header>
 
   <nav>
