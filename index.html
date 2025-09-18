@@ -5,22 +5,86 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DailyNEXT</title>
   <style>
-    body { font-family: Arial, sans-serif; background: #111; color: #fff; margin:0; padding:0; }
-    header { background: #003300; padding: 15px 20px; display:flex; align-items:center; }
-    header h1 { margin:0; font-weight: normal; }
-    header h1 span { font-weight:bold; }
-    nav { margin-left: auto; }
-    nav a { color: #fff; margin-left: 20px; text-decoration:none; font-weight:bold; }
-    main { padding:20px; }
-    .card { background:#222; margin-bottom:20px; padding:15px; border-left:5px solid; cursor:pointer; }
-    .card:hover { background:#333; }
-    .category { font-size:12px; display:flex; align-items:center; margin-bottom:5px; }
-    .dot { width:10px; height:10px; border-radius:50%; display:inline-block; margin-right:5px; }
-    .blue { background:#1e90ff; border-bottom:3px solid #1e90ff; }
-    .red { background:#ff4500; border-bottom:3px solid #ff4500; }
-    .green { background:#32cd32; border-bottom:3px solid #32cd32; }
-    a.card-link { color:#fff; text-decoration:none; display:block; }
-    a.card-link h2 { margin:0 0 10px 0; }
+    body {
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #003300; /* koyu yeşil */
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+    }
+    header h1 {
+      margin: 0;
+      font-weight: normal;
+    }
+    header h1 span {
+      font-weight: bold;
+    }
+    nav {
+      margin-left: auto;
+    }
+    nav a {
+      color: #fff;
+      margin-left: 20px;
+      text-decoration: none;
+      font-weight: bold;
+      position: relative;
+    }
+    /* Animasyon çizgisi */
+    nav a::after {
+      content: '';
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      left: 0;
+      bottom: -5px;
+      background: #fff;
+      transition: width 0.3s;
+    }
+    nav a:hover::after {
+      width: 100%;
+    }
+    main {
+      padding: 20px;
+    }
+    .card {
+      background: #222;
+      margin-bottom: 20px;
+      padding: 15px;
+      border-left: 5px solid;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .card:hover {
+      background: #333;
+    }
+    .category {
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      margin-bottom: 5px;
+    }
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: 5px;
+    }
+    .blue { background: #1e90ff; border-bottom: 3px solid #1e90ff; }
+    .red { background: #ff4500; border-bottom: 3px solid #ff4500; }
+    .green { background: #32cd32; border-bottom: 3px solid #32cd32; }
+    a.card-link {
+      color: #fff;
+      text-decoration: none;
+      display: block;
+    }
+    a.card-link h2 { margin: 0 0 10px 0; }
   </style>
 </head>
 <body>
@@ -31,6 +95,7 @@
       <a href="#">Filistin</a>
       <a href="#">Türkiye</a>
       <a href="#">Gündem</a>
+      <a href="#">İletişim</a>
     </nav>
   </header>
 
