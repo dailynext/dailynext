@@ -5,123 +5,107 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DailyNEXT</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #111;
-      color: #fff;
-      margin: 0;
-      padding: 0;
-    }
-    header {
-      background: #002200; /* Daha koyu yeşil */
-      padding: 15px 20px;
-      display: flex;
-      align-items: center;
-    }
-    header h1 {
-      margin: 0;
-      font-weight: normal;
-    }
-    header h1 span {
-      font-weight: bold; /* NEXT kalın */
-    }
-    nav {
-      margin-left: auto;
-    }
-    nav a {
-      color: #fff;
-      margin-left: 20px;
-      text-decoration: none;
-      font-weight: bold;
-      position: relative;
-    }
-    nav a::after {
-      content: '';
-      position: absolute;
-      width: 0%;
-      height: 2px;
-      left: 0;
-      bottom: -5px;
-      background: #fff;
-      transition: width 0.3s;
-    }
-    nav a:hover::after {
-      width: 100%;
-    }
-    main {
-      padding: 20px;
-    }
-    .card {
-      background: #222;
-      margin-bottom: 20px;
-      padding: 15px;
-      border-left: 5px solid;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-    .card:hover {
-      background: #333;
-    }
-    .category {
-      font-size: 12px;
-      display: flex;
-      align-items: center;
-      margin-bottom: 5px;
-    }
-    .dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      display: inline-block;
-      margin-right: 5px;
-    }
-    .blue { background: #1e90ff; border-bottom: 3px solid #1e90ff; }
-    .red { background: #ff4500; border-bottom: 3px solid #ff4500; }
-    .green { background: #32cd32; border-bottom: 3px solid #32cd32; }
-    a.card-link {
-      color: #fff;
-      text-decoration: none;
-      display: block;
-    }
-    a.card-link h2 { margin: 0 0 10px 0; }
+    body { margin:0; font-family: Arial, sans-serif; background-color: #111; color: #fff; }
+    header { background-color: #012d12; padding: 15px 30px; text-align: left; }
+    header h1 { margin:0; font-size:24px; color:#fff; font-weight:normal; }
+    header h1 .next { font-weight:bold; }
+    nav { background-color: #222; padding:10px; display:flex; justify-content:center; gap:20px; }
+    nav a { color:#fff; text-decoration:none; font-weight:bold; position:relative; padding-bottom:5px; }
+    nav a::after { content:''; position:absolute; left:0; bottom:0; width:0; height:2px; background-color:#fff; transition:width 0.3s ease; }
+    nav a:hover::after { width:100%; }
+    .category { font-size:14px; font-weight:bold; margin-bottom:5px; display:flex; align-items:center; gap:6px; }
+    .dot { width:8px; height:8px; border-radius:50%; display:inline-block; }
+    .turkiye .dot { background-color:red; }
+    .turkiye { border-bottom:2px solid red; color:#fff; }
+    .filistin .dot { background-color:green; }
+    .filistin { border-bottom:2px solid green; color:#fff; }
+    .gundem .dot { background-color:blue; }
+    .gundem { border-bottom:2px solid blue; color:#fff; }
+    .news-card { margin:20px auto; padding:20px; max-width:800px; background:#1c1c1c; border-radius:10px; }
+    .news-card img { width:100%; border-radius:10px; }
+    .news-card h2 { margin:10px 0; font-size:22px; }
+    .news-card p { font-size:16px; line-height:1.6; }
+    footer { background-color:#222; text-align:center; padding:15px; margin-top:20px; font-size:14px; color:#aaa; }
   </style>
 </head>
 <body>
   <header>
-    <h1>Daily<span>NEXT</span></h1>
-    <nav>
-      <a href="index.html">Ana Sayfa</a>
-      <a href="#">Filistin</a>
-      <a href="#">Türkiye</a>
-      <a href="#">Gündem</a>
-      <a href="#">İletişim</a>
-    </nav>
+    <h1><span class="daily">Daily</span><span class="next">NEXT</span></h1>
   </header>
 
-  <main>
-    <!-- Filistin Haber -->
-    <a class="card-link" href="https://nsosyal.com/@eyyup_ctrz/115226716434468194" target="_blank">
-      <div class="card" style="border-left-color:#32cd32;">
-        <div class="category"><span class="dot green"></span>Filistin</div>
-        <h2>🇵🇸🔻 El Kassam Tugayları’ndan Açıklama</h2>
-      </div>
-    </a>
+  <nav>
+    <a href="#">Ana Sayfa</a>
+    <a href="#">Filistin</a>
+    <a href="#">Türkiye</a>
+    <a href="#">İletişim</a>
+  </nav>
 
-    <!-- Gündem Haber -->
-    <a class="card-link" href="https://nsosyal.com/@eyyup_ctrz/115224075593277996" target="_blank">
-      <div class="card" style="border-left-color:#1e90ff;">
-        <div class="category"><span class="dot blue"></span>Gündem</div>
-        <h2>🔴 Boykot markası Carrefour; Bahreyn, Ürdün, Umman ve Kuveyt’ten çekildi</h2>
-      </div>
-    </a>
-
-    <!-- Türkiye Haber -->
-    <a class="card-link" href="https://nsosyal.com/@eyyup_ctrz/115209853761466572" target="_blank">
-      <div class="card" style="border-left-color:#ff4500;">
-        <div class="category"><span class="dot red"></span>Türkiye</div>
-        <h2>Adana Valiliği, Mavi Marmara Gazisi Fevziye Şenoğlu soruşturması başlattı</h2>
-      </div>
-    </a>
+  <main id="news-container">
+    <!-- Haberler buraya JS ile eklenecek -->
   </main>
+
+  <footer>
+    <p>© 2025 Eyyüp</p>
+  </footer>
+
+  <script>
+    // Next/Sosyal paylaşımlarını otomatik ekleme
+    const newsData = [
+      {
+        category: 'filistin',
+        title: '🇵🇸🔻 El Kassam Tugayları’ndan Açıklama',
+        url: 'https://nsosyal.com/@eyyup_ctrz/115226716434468194',
+        img: 'https://placehold.co/800x400' // Görsel URL'yi gerçek Next paylaşımından alabilirsin
+      },
+      {
+        category: 'gundem',
+        title: '🔴 Boykot markası Carrefour; Bahreyn, Ürdün, Umman ve Kuveyt’ten çekildi',
+        url: 'https://nsosyal.com/@eyyup_ctrz/115224075593277996',
+        img: 'https://placehold.co/800x400'
+      },
+      {
+        category: 'turkiye',
+        title: 'Adana Valiliği, Mavi Marmara Gazisi Fevziye Şenoğlu soruşturması başlattı',
+        url: 'https://nsosyal.com/@eyyup_ctrz/115209853761466572',
+        img: 'https://placehold.co/800x400'
+      }
+    ];
+
+    const container = document.getElementById('news-container');
+
+    newsData.forEach(news => {
+      const section = document.createElement('section');
+      section.classList.add('news-card');
+
+      const categoryDiv = document.createElement('div');
+      categoryDiv.classList.add('category', news.category);
+
+      const dot = document.createElement('span');
+      dot.classList.add('dot');
+      categoryDiv.appendChild(dot);
+      categoryDiv.appendChild(document.createTextNode(' ' + news.category.charAt(0).toUpperCase() + news.category.slice(1)));
+
+      const link = document.createElement('a');
+      link.href = news.url;
+      link.target = "_blank";
+      link.style.color = '#fff';
+      link.style.textDecoration = 'none';
+
+      const title = document.createElement('h2');
+      title.textContent = news.title;
+
+      const img = document.createElement('img');
+      img.src = news.img;
+      img.alt = news.title;
+
+      link.appendChild(img);
+      link.appendChild(title);
+
+      section.appendChild(categoryDiv);
+      section.appendChild(link);
+
+      container.appendChild(section);
+    });
+  </script>
 </body>
 </html>
