@@ -5,27 +5,115 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DailyNEXT</title>
   <style>
-    body { margin:0; font-family: Arial, sans-serif; background-color: #111; color: #fff; }
-    header { background-color: #012d12; padding: 15px 30px; text-align: left; }
-    header h1 { margin:0; font-size:24px; color:#fff; font-weight:normal; }
-    header h1 .next { font-weight:bold; }
-    nav { background-color: #222; padding:10px; display:flex; justify-content:center; gap:20px; }
-    nav a { color:#fff; text-decoration:none; font-weight:bold; position:relative; padding-bottom:5px; }
-    nav a::after { content:''; position:absolute; left:0; bottom:0; width:0; height:2px; background-color:#fff; transition:width 0.3s ease; }
-    nav a:hover::after { width:100%; }
-    .category { font-size:14px; font-weight:bold; margin-bottom:5px; display:flex; align-items:center; gap:6px; }
-    .dot { width:8px; height:8px; border-radius:50%; display:inline-block; }
-    .turkiye .dot { background-color:red; }
-    .turkiye { border-bottom:2px solid red; color:#fff; }
-    .filistin .dot { background-color:green; }
-    .filistin { border-bottom:2px solid green; color:#fff; }
-    .gundem .dot { background-color:blue; }
-    .gundem { border-bottom:2px solid blue; color:#fff; }
-    .news-card { margin:20px auto; padding:20px; max-width:800px; background:#1c1c1c; border-radius:10px; cursor:pointer; }
-    .news-card img { width:100%; border-radius:10px; display:block; }
-    .news-card h2 { margin:10px 0; font-size:22px; }
-    .news-card p { font-size:16px; line-height:1.6; display:none; } /* başlangıçta gizli */
-    footer { background-color:#222; text-align:center; padding:15px; margin-top:20px; font-size:14px; color:#aaa; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #111;
+      color: #fff;
+    }
+    header {
+      background-color: #012d12; /* daha koyu yeşil */
+      padding: 15px 30px;
+      text-align: left;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 24px;
+      color: #fff;
+      font-weight: normal;
+    }
+    header h1 .next {
+      font-weight: bold; /* NEXT kalın */
+    }
+    nav {
+      background-color: #222;
+      padding: 10px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      position: relative;
+      padding-bottom: 5px;
+    }
+    nav a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      background-color: #fff; /* beyaz animasyon çizgisi */
+      transition: width 0.3s ease;
+    }
+    nav a:hover::after {
+      width: 100%;
+    }
+    .category {
+      font-size: 14px;
+      font-weight: bold;
+      margin-bottom: 5px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .turkiye .dot {
+      background-color: red;
+    }
+    .turkiye {
+      border-bottom: 2px solid red;
+      color: #fff;
+    }
+    .filistin .dot {
+      background-color: green;
+    }
+    .filistin {
+      border-bottom: 2px solid green;
+      color: #fff;
+    }
+    .gundem .dot {
+      background-color: blue;
+    }
+    .gundem {
+      border-bottom: 2px solid blue;
+      color: #fff;
+    }
+    .news-card {
+      margin: 20px auto;
+      padding: 20px;
+      max-width: 800px;
+      background: #1c1c1c;
+      border-radius: 10px;
+    }
+    .news-card img {
+      width: 100%;
+      border-radius: 10px;
+    }
+    .news-card h2 {
+      margin: 10px 0;
+      font-size: 22px;
+    }
+    .news-card p {
+      font-size: 16px;
+      line-height: 1.6;
+    }
+    footer {
+      background-color: #222;
+      text-align: center;
+      padding: 15px;
+      margin-top: 20px;
+      font-size: 14px;
+      color: #aaa;
+    }
   </style>
 </head>
 <body>
@@ -40,73 +128,40 @@
     <a href="#">İletişim</a>
   </nav>
 
-  <main id="news-container">
-    <!-- Haberler JS ile eklenecek -->
+  <main>
+    <!-- Filistin haberi -->
+    <section class="news-card">
+      <div class="category filistin">
+        <span class="dot"></span> Filistin
+      </div>
+      <img src="https://nsosyal.com/p/115226716434468194/0.jpg" alt="El Kassam Tugayları Haberi">
+      <h2>🇵🇸🔻 El Kassam Tugayları’ndan Açıklama</h2>
+      <p>“Düşmanın (işgalci) askeri ve siyasi yönetimine diyoruz ki: Gazze, korkak ordunuz için kolay bir lokma olmayacak. Biz sizden korkmuyoruz ve askerlerinizi cehenneme göndermeye hazırız. Size şehadet eylemlerine hazır bir ordu, binlerce pusu ve patlayıcı düzenek hazırladık; Gazze, askerleriniz için bir mezar olacaktır. Zorlu bir yıpratma savaşına giriyorsunuz; bu size yeni ölüler ve esirler getirecek. Mücahitlerimizi araçlarınızın bölmelerine düzenek yerleştirme konusunda eğittik; ayrıca dozerleriniz mücahitlerimiz için özel hedefler olacak ve esir sayımızın artmasına neden olacak.”</p>
+    </section>
+
+    <!-- Türkiye haberi -->
+    <section class="news-card">
+      <div class="category turkiye">
+        <span class="dot"></span> Türkiye
+      </div>
+      <img src="https://nsosyal.com/p/115209853761466572/0.jpg" alt="Türkiye Haberi">
+      <h2>Adana Valiliği Soruşturma Başlattı</h2>
+      <p>Adana Valiliği, Mavi Marmara Gazisi Fevziye Şenoğlu'na yönelik muamele hakkında soruşturma başlatarak 3 polis memurunun görevden uzaklaştırıldığını duyurdu.</p>
+    </section>
+
+    <!-- Gündem haberi -->
+    <section class="news-card">
+      <div class="category gundem">
+        <span class="dot"></span> Gündem
+      </div>
+      <img src="https://nsosyal.com/p/115224075593277996/0.jpg" alt="Boykot Haberi">
+      <h2>🔴 Boykot markası Carrefour Çekildi</h2>
+      <p>Bahreyn, Ürdün, Umman ve Kuveyt’ten çekildi. Detayları ise büyük haber sitelerinden alınabilir.</p>
+    </section>
   </main>
 
   <footer>
     <p>© 2025 Eyyüp</p>
   </footer>
-
-  <script>
-    const newsData = [
-      {
-        category: 'filistin',
-        title: '🇵🇸🔻 El Kassam Tugayları’ndan Açıklama',
-        img: 'https://nsosyal.com/@eyyup_ctrz/115226716434468194',
-        details: `“Düşmanın (işgalci) askeri ve siyasi yönetimine diyoruz ki: Gazze, korkak ordunuz için kolay bir lokma olmayacak. Biz sizden korkmuyoruz ve askerlerinizi cehenneme göndermeye hazırız. 
-        Size şehadet eylemlerine hazır bir ordu, binlerce pusu ve patlayıcı düzenek hazırladık; Gazze, askerleriniz için bir mezar olacaktır.
-        Zorlu bir yıpratma savaşına giriyorsunuz; bu size yeni ölüler ve esirler getirecek. Mücahitlerimizi araçlarınızın bölmelerine düzenek yerleştirme konusunda eğittik; ayrıca dozerleriniz mücahitlerimiz için özel hedefler olacak ve esir sayımızın artmasına neden olacak.”`
-      },
-      {
-        category: 'gundem',
-        title: '🔴 Boykot markası Carrefour; Bahreyn, Ürdün, Umman ve Kuveyt’ten çekildi',
-        img: 'https://nsosyal.com/@eyyup_ctrz/115224075593277996',
-        details: 'Detayları büyük haber sitelerinden alabilirsiniz. Bu metin haberin kısa özeti olarak gösteriliyor.'
-      },
-      {
-        category: 'turkiye',
-        title: 'Adana Valiliği, Mavi Marmara Gazisi Fevziye Şenoğlu soruşturması başlattı',
-        img: 'https://nsosyal.com/@eyyup_ctrz/115209853761466572',
-        details: '3 polis memurunun görevden uzaklaştırıldığı bildirildi.'
-      }
-    ];
-
-    const container = document.getElementById('news-container');
-
-    newsData.forEach(news => {
-      const section = document.createElement('section');
-      section.classList.add('news-card');
-
-      const categoryDiv = document.createElement('div');
-      categoryDiv.classList.add('category', news.category);
-
-      const dot = document.createElement('span');
-      dot.classList.add('dot');
-      categoryDiv.appendChild(dot);
-      categoryDiv.appendChild(document.createTextNode(' ' + news.category.charAt(0).toUpperCase() + news.category.slice(1)));
-
-      const title = document.createElement('h2');
-      title.textContent = news.title;
-
-      const img = document.createElement('img');
-      img.src = news.img;
-      img.alt = news.title;
-
-      const details = document.createElement('p');
-      details.textContent = news.details;
-
-      section.appendChild(categoryDiv);
-      section.appendChild(img);
-      section.appendChild(title);
-      section.appendChild(details);
-
-      section.addEventListener('click', () => {
-        details.style.display = details.style.display === 'block' ? 'none' : 'block';
-      });
-
-      container.appendChild(section);
-    });
-  </script>
 </body>
 </html>
