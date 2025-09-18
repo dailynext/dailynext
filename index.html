@@ -1,135 +1,179 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Eyyup'un Sitesi</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DailyNEXT</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #000;
+      padding: 15px;
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+    }
+    header span {
+      color: #fff;
+    }
+    header .next {
+      font-weight: 800;
+    }
+    .container {
+      width: 90%;
+      max-width: 1000px;
+      margin: 20px auto;
+    }
+    .card {
+      background: #1a1a1a;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .card:hover {
+      transform: scale(1.01);
+    }
+    .card img {
+      width: 100%;
+      display: block;
+    }
+    .category {
+      display: inline-block;
+      font-size: 14px;
+      margin: 10px 15px;
+      padding-bottom: 3px;
+      position: relative;
+    }
+    .category::before {
+      content: "• ";
+      font-size: 18px;
+      position: relative;
+      top: -1px;
+    }
+    .category.gundem { color: #00aaff; border-bottom: 2px solid #00aaff; }
+    .category.gundem::before { color: #00aaff; }
+    .category.turkiye { color: #ff4444; border-bottom: 2px solid #ff4444; }
+    .category.turkiye::before { color: #ff4444; }
+    .category.filistin { color: #00cc66; border-bottom: 2px solid #00cc66; }
+    .category.filistin::before { color: #00cc66; }
+    .title {
+      font-size: 20px;
+      font-weight: bold;
+      margin: 10px 15px 15px 15px;
+    }
 
-<!-- Next mavi tik için fediverse meta tag -->
-<meta name="fediverse:creator" content="@eyyup_ctrz@sosyal.teknofest.app">
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-
-<style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Inter', sans-serif; background-color: #000; color: #fff; }
-  a { text-decoration: none; }
-
-  header {
-    background-color: #111;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 30px;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.5);
-  }
-  .logo { font-size: 28px; font-weight: 400; color: #fff; }
-  .logo span { font-weight: 700; }
-  nav a { color: #fff; margin-left: 25px; position: relative; transition: color 0.3s; }
-  nav a::after {
-    content: ''; display: block; width: 0; height: 2px; background: #2ECC71; transition: width 0.3s;
-    position: absolute; bottom: -5px; left: 0;
-  }
-  nav a:hover { color: #E74C3C; }
-  nav a:hover::after { width: 100%; }
-
-  .hero { position: relative; text-align: left; max-width: 900px; margin: 50px auto; }
-  .hero img { width: 100%; border-radius: 10px; transition: opacity 0.5s; }
-  .hero img:hover { opacity: 0.9; }
-  .hero-content { position: absolute; bottom: 20px; left: 20px; color: #fff; background: rgba(0,0,0,0.5); padding: 20px; border-radius: 8px; }
-
-  .news-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px; max-width: 1000px; margin: 50px auto; padding: 0 20px;
-  }
-  .news-card { background-color: #111; border-radius: 10px; overflow: hidden; transition: transform 0.3s, box-shadow 0.3s; }
-  .news-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.6); }
-  .news-card img { width: 100%; height: auto; border-bottom: 2px solid #2ECC71; }
-  .news-card .card-content { padding: 15px; }
-  .news-card h3 { color: #2ECC71; margin-bottom: 10px; }
-  .news-card p { font-size: 15px; color: #ccc; line-height: 1.6; }
-
-  footer { text-align: center; padding: 20px; background-color: #111; color: #888; margin-top: 50px; }
-
-  .verification { color: #2ECC71; display: inline-block; margin-top: 10px; }
-
-  @media(max-width:768px){
-    header { flex-direction: column; align-items: flex-start; }
-    nav { margin-top: 10px; }
-    nav a { margin-left: 0; margin-right: 15px; }
-  }
-</style>
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.8);
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      background: #1a1a1a;
+      padding: 20px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 800px;
+      max-height: 90%;
+      overflow-y: auto;
+      color: #fff;
+    }
+    .close {
+      float: right;
+      font-size: 28px;
+      cursor: pointer;
+    }
+    .close:hover {
+      color: red;
+    }
+    .modal h2 {
+      margin-top: 0;
+    }
+    iframe {
+      border: none;
+      margin-top: 15px;
+      width: 100%;
+    }
+  </style>
 </head>
 <body>
 
-<header>
-  <div class="logo">Daily<span>NEXT</span></div>
-  <nav>
-    <a href="#">Ana Sayfa</a>
-    <a href="#">Filistin</a>
-    <a href="#">Türkiye</a>
-    <a href="#">İletişim</a>
-  </nav>
-</header>
+  <header>
+    Daily<span class="next">NEXT</span>
+  </header>
 
-<section class="hero">
-  <img src="https://via.placeholder.com/900x400" alt="Öne Çıkan Haber">
-  <div class="hero-content">
-    <!-- Başlık ve alt metin kaldırıldı -->
+  <div class="container" id="newsContainer">
+    <!-- Haber kartları buraya JS ile gelecek -->
   </div>
-</section>
 
-<section class="news-grid">
-  <!-- Haber kartları buraya JS ile yüklenecek -->
-</section>
+  <!-- Modal -->
+  <div id="newsModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <div id="modalContent"></div>
+    </div>
+  </div>
 
-<main>
-  <a class="verification" rel="me" href="https://sosyal.teknofest.app/@eyyup_ctrz">Next Verification</a>
-</main>
+  <script>
+    // Haberler
+    const newsData = [
+      {
+        title: "İsrail, Han Yunus ve Nuseyrat'ta Yine Sivilleri Vurdu!",
+        detail: "İsrail ordusu Gazze’nin Han Yunus ve Nuseyrat bölgelerinde sivillere yönelik saldırılar düzenledi. Çok sayıda sivil hayatını kaybetti. Uluslararası toplum sessiz kalmaya devam ediyor.",
+        image: "https://via.placeholder.com/800x400",
+        category: "filistin",
+        embed: "<iframe src='https://sosyal.teknofest.app/@eyyup_ctrz/115209900827138175/embed' height='500'></iframe>"
+      },
+      {
+        title: "Türkiye'de Yeni Eğitim Yılı Başladı",
+        detail: "2025-2026 eğitim öğretim yılı bugün başladı. Milli Eğitim Bakanlığı okullarda ilk gün etkinlikleri düzenledi.",
+        image: "https://via.placeholder.com/800x400",
+        category: "turkiye",
+        embed: "<iframe src='https://sosyal.teknofest.app/@eyyup_ctrz/embed' height='500'></iframe>"
+      }
+    ];
 
-<footer>
-  <p>© 2025 Eyyup</p>
-</footer>
+    const container = document.getElementById("newsContainer");
+    const modal = document.getElementById("newsModal");
+    const modalContent = document.getElementById("modalContent");
+    const closeBtn = document.querySelector(".close");
 
-<script>
-  const newsData = [
-    {
-      "title": "İsrail, Han Yunus ve Nuseyrat'ta Yine Sivilleri Vurdu!",
-      "summary": "İsrail ordusu, Gazze'nin Han Yunus ve Nuseyrat bölgelerinde sivillere yönelik saldırılar düzenledi.",
-      "image": "https://via.placeholder.com/400x200",
-      "link": "https://sosyal.teknofest.app/@eyyup_ctrz/115209900827138175"
-    },
-    {
-      "title": "Erbaş: Filistin'e huzur gelmeden yeryüzüne huzur gelmeyecek",
-      "summary": "Diyanet İşleri Başkanı Prof. Dr. Ali Erbaş, Gazze konferansında açıklamalarda bulundu.",
-      "image": "https://via.placeholder.com/400x200",
-      "link": "https://www.diyanethaber.com.tr/erbas-filistine-huzur-gelmeden-yeryuzune-huzur-gelmeyecek"
-    },
-    {
-      "title": "İsrail, ağır koşullarda alıkoyduğu 10 Gazzeliyi serbest bıraktı",
-      "summary": "İsrail ordusu, Gazze Şeridi'nden alıkoyduğu 10 Filistinliyi serbest bıraktı.",
-      "image": "https://via.placeholder.com/400x200",
-      "link": "https://www.aa.com.tr/tr/dunya/israil-agir-kosullarda-alikoydugu-10-gazzeliyi-serbest-birakti/3665971"
-    }
-  ];
+    // Haber kartlarını oluştur
+    newsData.forEach((news, index) => {
+      const card = document.createElement("div");
+      card.classList.add("card");
+      card.innerHTML = `
+        <img src="${news.image}" alt="Haber görseli">
+        <div class="category ${news.category}">${news.category.charAt(0).toUpperCase() + news.category.slice(1)}</div>
+        <div class="title">${news.title}</div>
+      `;
+      card.addEventListener("click", () => {
+        modal.style.display = "flex";
+        modalContent.innerHTML = `
+          <h2>${news.title}</h2>
+          <p>${news.detail}</p>
+          ${news.embed}
+        `;
+      });
+      container.appendChild(card);
+    });
 
-  const newsGrid = document.querySelector('.news-grid');
-  newsData.forEach(news => {
-    const card = document.createElement('div');
-    card.classList.add('news-card');
-    card.innerHTML = `
-      <img src="${news.image}" alt="${news.title}">
-      <div class="card-content">
-        <h3><a href="${news.link}" target="_blank">${news.title}</a></h3>
-        <p>${news.summary}</p>
-      </div>
-    `;
-    newsGrid.appendChild(card);
-  });
-</script>
+    closeBtn.onclick = () => modal.style.display = "none";
+    window.onclick = (e) => { if (e.target == modal) modal.style.display = "none"; };
+  </script>
 
 </body>
 </html>
