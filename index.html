@@ -21,10 +21,10 @@
     .filistin { border-bottom:2px solid green; color:#fff; }
     .gundem .dot { background-color:blue; }
     .gundem { border-bottom:2px solid blue; color:#fff; }
-    .news-card { margin:20px auto; padding:20px; max-width:800px; background:#1c1c1c; border-radius:10px; }
-    .news-card img { width:100%; border-radius:10px; }
+    .news-card { margin:20px auto; padding:20px; max-width:800px; background:#1c1c1c; border-radius:10px; cursor:pointer; }
+    .news-card img { width:100%; border-radius:10px; display:block; }
     .news-card h2 { margin:10px 0; font-size:22px; }
-    .news-card p { font-size:16px; line-height:1.6; }
+    .news-card p { font-size:16px; line-height:1.6; display:none; } /* başlangıçta gizli */
     footer { background-color:#222; text-align:center; padding:15px; margin-top:20px; font-size:14px; color:#aaa; }
   </style>
 </head>
@@ -41,7 +41,7 @@
   </nav>
 
   <main id="news-container">
-    <!-- Haberler buraya JS ile eklenecek -->
+    <!-- Haberler JS ile eklenecek -->
   </main>
 
   <footer>
@@ -49,25 +49,26 @@
   </footer>
 
   <script>
-    // Next/Sosyal paylaşımlarını otomatik ekleme
     const newsData = [
       {
         category: 'filistin',
         title: '🇵🇸🔻 El Kassam Tugayları’ndan Açıklama',
-        url: 'https://nsosyal.com/@eyyup_ctrz/115226716434468194',
-        img: 'https://placehold.co/800x400' // Görsel URL'yi gerçek Next paylaşımından alabilirsin
+        img: 'https://nsosyal.com/@eyyup_ctrz/115226716434468194',
+        details: `“Düşmanın (işgalci) askeri ve siyasi yönetimine diyoruz ki: Gazze, korkak ordunuz için kolay bir lokma olmayacak. Biz sizden korkmuyoruz ve askerlerinizi cehenneme göndermeye hazırız. 
+        Size şehadet eylemlerine hazır bir ordu, binlerce pusu ve patlayıcı düzenek hazırladık; Gazze, askerleriniz için bir mezar olacaktır.
+        Zorlu bir yıpratma savaşına giriyorsunuz; bu size yeni ölüler ve esirler getirecek. Mücahitlerimizi araçlarınızın bölmelerine düzenek yerleştirme konusunda eğittik; ayrıca dozerleriniz mücahitlerimiz için özel hedefler olacak ve esir sayımızın artmasına neden olacak.”`
       },
       {
         category: 'gundem',
         title: '🔴 Boykot markası Carrefour; Bahreyn, Ürdün, Umman ve Kuveyt’ten çekildi',
-        url: 'https://nsosyal.com/@eyyup_ctrz/115224075593277996',
-        img: 'https://placehold.co/800x400'
+        img: 'https://nsosyal.com/@eyyup_ctrz/115224075593277996',
+        details: 'Detayları büyük haber sitelerinden alabilirsiniz. Bu metin haberin kısa özeti olarak gösteriliyor.'
       },
       {
         category: 'turkiye',
         title: 'Adana Valiliği, Mavi Marmara Gazisi Fevziye Şenoğlu soruşturması başlattı',
-        url: 'https://nsosyal.com/@eyyup_ctrz/115209853761466572',
-        img: 'https://placehold.co/800x400'
+        img: 'https://nsosyal.com/@eyyup_ctrz/115209853761466572',
+        details: '3 polis memurunun görevden uzaklaştırıldığı bildirildi.'
       }
     ];
 
@@ -85,12 +86,6 @@
       categoryDiv.appendChild(dot);
       categoryDiv.appendChild(document.createTextNode(' ' + news.category.charAt(0).toUpperCase() + news.category.slice(1)));
 
-      const link = document.createElement('a');
-      link.href = news.url;
-      link.target = "_blank";
-      link.style.color = '#fff';
-      link.style.textDecoration = 'none';
-
       const title = document.createElement('h2');
       title.textContent = news.title;
 
@@ -98,11 +93,17 @@
       img.src = news.img;
       img.alt = news.title;
 
-      link.appendChild(img);
-      link.appendChild(title);
+      const details = document.createElement('p');
+      details.textContent = news.details;
 
       section.appendChild(categoryDiv);
-      section.appendChild(link);
+      section.appendChild(img);
+      section.appendChild(title);
+      section.appendChild(details);
+
+      section.addEventListener('click', () => {
+        details.style.display = details.style.display === 'block' ? 'none' : 'block';
+      });
 
       container.appendChild(section);
     });
