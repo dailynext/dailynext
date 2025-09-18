@@ -4,6 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DailyNEXT</title>
+
+  <!-- Next mavi tik için fediverse meta tag -->
+  <meta name="fediverse:creator" content="@eyyup_ctrz@sosyal.teknofest.app">
+
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -12,38 +16,55 @@
       margin: 0;
       padding: 0;
     }
+
     header {
       background: #000;
-      padding: 15px;
+      padding: 20px;
       text-align: center;
-      font-size: 24px;
+    }
+    header h1 {
+      color: #fff;
+      margin: 0;
+      font-size: 28px;
+      font-weight: 600;
+    }
+    header h1 span {
+      font-weight: 800; /* NEXT kalın */
+    }
+
+    nav {
+      background: #222;
+      padding: 10px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+    nav a {
+      color: #fff;
+      text-decoration: none;
       font-weight: bold;
     }
-    header span {
-      color: #fff;
+
+    main {
+      padding: 20px;
     }
-    header .next {
-      font-weight: 800;
+
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
     }
-    .container {
-      width: 90%;
-      max-width: 1000px;
-      margin: 20px auto;
-    }
-    .card {
+
+    .news-card {
       background: #1a1a1a;
       border-radius: 10px;
-      margin-bottom: 20px;
       overflow: hidden;
-      cursor: pointer;
-      transition: 0.3s;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
     }
-    .card:hover {
-      transform: scale(1.01);
-    }
-    .card img {
+    .news-card img {
       width: 100%;
-      display: block;
+      height: 200px;
+      object-fit: cover;
     }
     .category {
       display: inline-block;
@@ -51,6 +72,7 @@
       margin: 10px 15px;
       padding-bottom: 3px;
       position: relative;
+      color: #fff; /* Yazılar beyaz */
     }
     .category::before {
       content: "• ";
@@ -58,16 +80,17 @@
       position: relative;
       top: -1px;
     }
-    .category.gundem { color: #00aaff; border-bottom: 2px solid #00aaff; }
+    .category.gundem { border-bottom: 2px solid #00aaff; }
     .category.gundem::before { color: #00aaff; }
-    .category.turkiye { color: #ff4444; border-bottom: 2px solid #ff4444; }
+    .category.turkiye { border-bottom: 2px solid #ff4444; }
     .category.turkiye::before { color: #ff4444; }
-    .category.filistin { color: #00cc66; border-bottom: 2px solid #00cc66; }
+    .category.filistin { border-bottom: 2px solid #00cc66; }
     .category.filistin::before { color: #00cc66; }
-    .title {
-      font-size: 20px;
-      font-weight: bold;
-      margin: 10px 15px 15px 15px;
+
+    .news-card h3 {
+      margin: 10px 15px;
+      font-size: 18px;
+      cursor: pointer;
     }
 
     /* Modal */
@@ -75,105 +98,142 @@
       display: none;
       position: fixed;
       z-index: 1000;
-      left: 0; top: 0;
-      width: 100%; height: 100%;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
       background: rgba(0,0,0,0.8);
       justify-content: center;
       align-items: center;
     }
     .modal-content {
-      background: #1a1a1a;
+      background: #222;
       padding: 20px;
       border-radius: 10px;
-      width: 90%;
+      width: 80%;
       max-width: 800px;
-      max-height: 90%;
+      max-height: 90vh;
       overflow-y: auto;
-      color: #fff;
-    }
-    .close {
-      float: right;
-      font-size: 28px;
-      cursor: pointer;
-    }
-    .close:hover {
-      color: red;
     }
     .modal h2 {
       margin-top: 0;
     }
+    .close {
+      float: right;
+      font-size: 24px;
+      cursor: pointer;
+    }
     iframe {
-      border: none;
-      margin-top: 15px;
       width: 100%;
+      border: none;
+      margin-top: 20px;
+    }
+
+    footer {
+      background: #000;
+      text-align: center;
+      padding: 15px;
+      margin-top: 20px;
     }
   </style>
 </head>
 <body>
-
   <header>
-    Daily<span class="next">NEXT</span>
+    <h1>Daily<span>NEXT</span></h1>
   </header>
 
-  <div class="container" id="newsContainer">
-    <!-- Haber kartları buraya JS ile gelecek -->
-  </div>
+  <nav>
+    <a href="#">Anasayfa</a>
+    <a href="#">Filistin</a>
+    <a href="#">Türkiye</a>
+  </nav>
+
+  <main>
+    <div class="news-grid" id="news-grid">
+      <!-- Haberler buraya eklenecek -->
+    </div>
+  </main>
 
   <!-- Modal -->
-  <div id="newsModal" class="modal">
+  <div class="modal" id="newsModal">
     <div class="modal-content">
-      <span class="close">&times;</span>
-      <div id="modalContent"></div>
+      <span class="close" id="closeModal">&times;</span>
+      <h2 id="modalTitle"></h2>
+      <p id="modalDetail"></p>
+      <iframe id="modalEmbed" height="400"></iframe>
     </div>
   </div>
 
+  <footer>
+    <p>© 2025 DailyNEXT</p>
+  </footer>
+
   <script>
-    // Haberler
-    const newsData = [
+    const news = [
       {
         title: "İsrail, Han Yunus ve Nuseyrat'ta Yine Sivilleri Vurdu!",
-        detail: "İsrail ordusu Gazze’nin Han Yunus ve Nuseyrat bölgelerinde sivillere yönelik saldırılar düzenledi. Çok sayıda sivil hayatını kaybetti. Uluslararası toplum sessiz kalmaya devam ediyor.",
-        image: "https://via.placeholder.com/800x400",
+        detail: "İsrail’in saldırılarında çok sayıda sivil hayatını kaybetti. Uluslararası toplum sessiz kalmaya devam ediyor.",
+        image: "https://via.placeholder.com/400x200",
         category: "filistin",
-        embed: "<iframe src='https://sosyal.teknofest.app/@eyyup_ctrz/115209900827138175/embed' height='500'></iframe>"
+        embed: "https://sosyal.teknofest.app/@eyyup_ctrz/115209900827138175/embed"
       },
       {
-        title: "Türkiye'de Yeni Eğitim Yılı Başladı",
-        detail: "2025-2026 eğitim öğretim yılı bugün başladı. Milli Eğitim Bakanlığı okullarda ilk gün etkinlikleri düzenledi.",
-        image: "https://via.placeholder.com/800x400",
+        title: "Türkiye’de Ekonomik Gelişmeler",
+        detail: "Türkiye’de enflasyon oranları ve ekonomik politikalar gündemde.",
+        image: "https://via.placeholder.com/400x200",
         category: "turkiye",
-        embed: "<iframe src='https://sosyal.teknofest.app/@eyyup_ctrz/embed' height='500'></iframe>"
+        embed: "https://sosyal.teknofest.app/@eyyup_ctrz/embed"
+      },
+      {
+        title: "Gazze’de İnsanlık Dramı Devam Ediyor",
+        detail: "Filistin halkı zor koşullar altında yaşam mücadelesi veriyor.",
+        image: "https://via.placeholder.com/400x200",
+        category: "filistin",
+        embed: "https://sosyal.teknofest.app/@eyyup_ctrz/embed"
       }
     ];
 
-    const container = document.getElementById("newsContainer");
+    const grid = document.getElementById("news-grid");
     const modal = document.getElementById("newsModal");
-    const modalContent = document.getElementById("modalContent");
-    const closeBtn = document.querySelector(".close");
+    const closeModal = document.getElementById("closeModal");
 
-    // Haber kartlarını oluştur
-    newsData.forEach((news, index) => {
+    const modalTitle = document.getElementById("modalTitle");
+    const modalDetail = document.getElementById("modalDetail");
+    const modalEmbed = document.getElementById("modalEmbed");
+
+    news.forEach((item, index) => {
       const card = document.createElement("div");
-      card.classList.add("card");
+      card.classList.add("news-card");
       card.innerHTML = `
-        <img src="${news.image}" alt="Haber görseli">
-        <div class="category ${news.category}">${news.category.charAt(0).toUpperCase() + news.category.slice(1)}</div>
-        <div class="title">${news.title}</div>
+        <img src="${item.image}" alt="${item.title}">
+        <span class="category ${item.category}">${item.category.charAt(0).toUpperCase() + item.category.slice(1)}</span>
+        <h3 data-index="${index}">${item.title}</h3>
       `;
-      card.addEventListener("click", () => {
-        modal.style.display = "flex";
-        modalContent.innerHTML = `
-          <h2>${news.title}</h2>
-          <p>${news.detail}</p>
-          ${news.embed}
-        `;
-      });
-      container.appendChild(card);
+      grid.appendChild(card);
     });
 
-    closeBtn.onclick = () => modal.style.display = "none";
-    window.onclick = (e) => { if (e.target == modal) modal.style.display = "none"; };
-  </script>
+    grid.addEventListener("click", (e) => {
+      if (e.target.tagName === "H3") {
+        const idx = e.target.getAttribute("data-index");
+        const item = news[idx];
+        modalTitle.textContent = item.title;
+        modalDetail.textContent = item.detail;
+        modalEmbed.src = item.embed;
+        modal.style.display = "flex";
+      }
+    });
 
+    closeModal.onclick = () => {
+      modal.style.display = "none";
+      modalEmbed.src = "";
+    };
+
+    window.onclick = (event) => {
+      if (event.target === modal) {
+        modal.style.display = "none";
+        modalEmbed.src = "";
+      }
+    };
+  </script>
 </body>
 </html>
